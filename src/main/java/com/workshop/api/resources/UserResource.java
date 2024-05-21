@@ -1,5 +1,6 @@
 package com.workshop.api.resources;
 
+import com.workshop.api.dto.UserDto;
 import com.workshop.api.entities.UserEntity;
 import com.workshop.api.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,10 @@ public class UserResource {
     private UserService service;
 
     @GetMapping(value = "/all")
-    public ResponseEntity<List<UserEntity>> findAll() {
+    public ResponseEntity<List<UserDto>> findAll() {
         List<UserEntity> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+        List<UserDto> listDto = list.stream().map(UserDto::new).toList();
+        return ResponseEntity.ok().body(listDto);
     }
 
     @GetMapping("/{id}")
