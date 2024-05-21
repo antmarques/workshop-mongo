@@ -1,5 +1,6 @@
 package com.workshop.api.services;
 
+import com.workshop.api.dto.UserDto;
 import com.workshop.api.repositories.UserRepository;
 import com.workshop.api.entities.UserEntity;
 import com.workshop.api.services.exceptions.ObjectNotFoundException;
@@ -24,4 +25,11 @@ public class UserService {
         return user.orElseThrow(() -> new ObjectNotFoundException(id));
     }
 
+    public UserEntity insert(UserEntity user) {
+        return userRepository.insert(user);
+    }
+
+    public UserEntity fromDto(UserDto dto) {
+        return new UserEntity(dto.getId(), dto.getName(), dto.getEmail());
+    }
 }
