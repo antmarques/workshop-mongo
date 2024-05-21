@@ -6,9 +6,7 @@ import com.workshop.api.entities.UserEntity;
 import com.workshop.api.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
