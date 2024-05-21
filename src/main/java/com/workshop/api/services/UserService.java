@@ -2,6 +2,7 @@ package com.workshop.api.services;
 
 import com.workshop.api.repositories.UserRepository;
 import com.workshop.api.entities.UserEntity;
+import com.workshop.api.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class UserService {
 
     public UserEntity findById(String id) {
         Optional<UserEntity> user = userRepository.findById(id);
-        return user.get();
+        return user.orElseThrow(() -> new ObjectNotFoundException(id));
     }
 
 }
