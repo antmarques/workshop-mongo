@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -22,11 +23,16 @@ public class UserService {
 
     public UserEntity findById(String id) {
         Optional<UserEntity> user = userRepository.findById(id);
-        return user.orElseThrow(() -> new ObjectNotFoundException(id));
+        return user.orElseThrow(() -> new ObjectNotFoundException(id + " Not founded"));
     }
 
     public UserEntity insert(UserEntity user) {
         return userRepository.insert(user);
+    }
+
+    public void deleteById(String id) {
+        findById(id);
+        userRepository.deleteById(id);
     }
 
     public UserEntity fromDto(UserDto dto) {

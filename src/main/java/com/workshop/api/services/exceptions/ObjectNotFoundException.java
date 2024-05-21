@@ -3,6 +3,6 @@ package com.workshop.api.services.exceptions;
 public class ObjectNotFoundException extends RuntimeException{
 
     public ObjectNotFoundException(String msg) {
-        super();
+        super(msg);
     }
 }
