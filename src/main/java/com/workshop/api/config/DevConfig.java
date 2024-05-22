@@ -1,5 +1,6 @@
 package com.workshop.api.config;
 
+import com.workshop.api.dto.AuthorDto;
 import com.workshop.api.entities.PostEntity;
 import com.workshop.api.entities.UserEntity;
 import com.workshop.api.repositories.PostRepository;
@@ -37,8 +38,8 @@ public class DevConfig implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(user1, user2, user3, user4));
 
         postRepository.deleteAll();
-        PostEntity post1 = new PostEntity(null, new Date(), "Partiu SP","Vou viajar para São Paulo. Abraços", user3);
-        PostEntity post2 = new PostEntity(null, new Date(), "Enfim 2.1 anos","Ficando mais velho e desempregado mesmo formado", user1);
+        PostEntity post1 = new PostEntity(null, new Date(), "Partiu SP","Vou viajar para São Paulo. Abraços", new AuthorDto(user3));
+        PostEntity post2 = new PostEntity(null, new Date(), "Enfim 2.1 anos","Ficando mais velho e desempregado mesmo formado", new AuthorDto(user1));
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 }

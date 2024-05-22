@@ -6,8 +6,9 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 
+
 @Data
-public class UserDto implements Serializable {
+public class AuthorDto implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -16,14 +17,11 @@ public class UserDto implements Serializable {
 
     private String name;
 
-    private String email;
-
-    public UserDto() {
+    public AuthorDto() {
     }
 
-    public UserDto(UserEntity user) {
-        id = user.getId();
-        name = user.getName();
-        email = user.getEmail();
+    public AuthorDto(UserEntity entity) {
+        id = entity.getId();
+        name = entity.getName();
     }
 }
