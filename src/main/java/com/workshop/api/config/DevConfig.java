@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 @Configuration
@@ -29,6 +30,8 @@ public class DevConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Locale.setDefault(Locale.of("pt", "BR"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         userRepository.deleteAll();
         UserEntity user1 = new UserEntity(null, "Antonio Carlos", "antonio@gmail.com");
@@ -38,11 +41,15 @@ public class DevConfig implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(user1, user2, user3, user4));
 
         postRepository.deleteAll();
-        PostEntity post1 = new PostEntity(null, new Date(), "Partiu SP","Vou viajar para São Paulo. Abraços", new AuthorDto(user3));
-        PostEntity post2 = new PostEntity(null, new Date(), "Enfim 2.1 anos","Ficando mais velho e desempregado mesmo formado", new AuthorDto(user1));
-        postRepository.saveAll(Arrays.asList(post1, post2));
+        PostEntity post1 = new PostEntity(null, new Date(), sdf.format(new Date()),"Partiu SP",
+                "Vou viajar para São Paulo. Abraços", new AuthorDto(user3));
+        PostEntity post2 = new PostEntity(null, new Date(), sdf.format(new Date()), "Enfim 2.1 anos",
+                "Ficando mais velho e desempregado mesmo formado", new AuthorDto(user1));
+        PostEntity post3 = new PostEntity(null, new Date(), sdf.format(new Date()),
+                "Comprei meu primeiro video game","Meu sonho desde criança era comprar um vídeo game sozinho!", new AuthorDto(user1));
+        postRepository.saveAll(Arrays.asList(post1, post2, post3));
 
-        user1.getPosts().add(post2);
+        user1.getPosts().addAll(Arrays.asList(post2, post3));
         user3.getPosts().add(post1);
         userRepository.saveAll(Arrays.asList(user1, user3));
     }

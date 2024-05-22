@@ -1,5 +1,6 @@
 package com.workshop.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.workshop.api.dto.AuthorDto;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -21,6 +22,8 @@ public class PostEntity implements Serializable {
 
     private Date date;
 
+    private String dateFormat;
+
     private String title;
 
     private String body;
@@ -30,9 +33,10 @@ public class PostEntity implements Serializable {
     public PostEntity() {
     }
 
-    public PostEntity(String id, Date date, String title, String body, AuthorDto author) {
+    public PostEntity(String id, Date date, String dateFormat,String title, String body, AuthorDto author) {
         this.id = id;
         this.date = date;
+        this.dateFormat = dateFormat;
         this.title = title;
         this.body = body;
         this.author = author;

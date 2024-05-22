@@ -1,6 +1,7 @@
 package com.workshop.api.resources;
 
 import com.workshop.api.dto.UserDto;
+import com.workshop.api.entities.PostEntity;
 import com.workshop.api.entities.UserEntity;
 import com.workshop.api.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,12 @@ public class UserResource {
     public ResponseEntity<UserDto> findById(@PathVariable String id) {
         UserEntity entity = service.findById(id);
         return ResponseEntity.ok().body(new UserDto(entity));
+    }
+
+    @GetMapping("/posts/{id}")
+    public ResponseEntity<List<PostEntity>> findPosts(@PathVariable String id) {
+        UserEntity entity = service.findById(id);
+        return ResponseEntity.ok().body(entity.getPosts().reversed());
     }
 
     @PostMapping("/insert")
