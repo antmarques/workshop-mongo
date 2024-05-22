@@ -2,10 +2,12 @@ package com.workshop.api.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Document("user")
 @Data
@@ -20,6 +22,9 @@ public class UserEntity implements Serializable {
     private String name;
 
     private String email;
+
+    @DBRef(lazy = true)
+    private List<PostEntity> posts = new ArrayList<>();
 
     public UserEntity() {
     }

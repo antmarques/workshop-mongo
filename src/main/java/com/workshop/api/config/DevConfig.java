@@ -41,5 +41,9 @@ public class DevConfig implements CommandLineRunner {
         PostEntity post1 = new PostEntity(null, new Date(), "Partiu SP","Vou viajar para São Paulo. Abraços", new AuthorDto(user3));
         PostEntity post2 = new PostEntity(null, new Date(), "Enfim 2.1 anos","Ficando mais velho e desempregado mesmo formado", new AuthorDto(user1));
         postRepository.saveAll(Arrays.asList(post1, post2));
+
+        user1.getPosts().add(post2);
+        user3.getPosts().add(post1);
+        userRepository.saveAll(Arrays.asList(user1, user3));
     }
 }
