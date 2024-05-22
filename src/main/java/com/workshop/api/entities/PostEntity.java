@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.workshop.api.dto.AuthorDto;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Document(collection = "post")
@@ -22,6 +24,7 @@ public class PostEntity implements Serializable {
 
     private Date date;
 
+    @Transient
     private String dateFormat;
 
     private String title;
@@ -33,12 +36,17 @@ public class PostEntity implements Serializable {
     public PostEntity() {
     }
 
-    public PostEntity(String id, Date date, String dateFormat,String title, String body, AuthorDto author) {
+    public PostEntity(String id, Date date, String title, String body, AuthorDto author) {
         this.id = id;
         this.date = date;
-        this.dateFormat = dateFormat;
         this.title = title;
         this.body = body;
         this.author = author;
+    }
+
+    public String getDateFormat() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat = sdf.format(date);
+        return dateFormat;
     }
 }

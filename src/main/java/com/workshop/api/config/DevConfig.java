@@ -9,15 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import com.workshop.api.repositories.UserRepository;
-
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
-
 @Configuration
 @Profile("dev")
 public class DevConfig implements CommandLineRunner {
@@ -41,11 +36,11 @@ public class DevConfig implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(user1, user2, user3, user4));
 
         postRepository.deleteAll();
-        PostEntity post1 = new PostEntity(null, new Date(), sdf.format(new Date()),"Partiu SP",
+        PostEntity post1 = new PostEntity(null, new Date(),"Partiu SP",
                 "Vou viajar para São Paulo. Abraços", new AuthorDto(user3));
-        PostEntity post2 = new PostEntity(null, new Date(), sdf.format(new Date()), "Enfim 2.1 anos",
+        PostEntity post2 = new PostEntity(null, new Date(), "Enfim 2.1 anos",
                 "Ficando mais velho e desempregado mesmo formado", new AuthorDto(user1));
-        PostEntity post3 = new PostEntity(null, new Date(), sdf.format(new Date()),
+        PostEntity post3 = new PostEntity(null, new Date(),
                 "Comprei meu primeiro video game","Meu sonho desde criança era comprar um vídeo game sozinho!", new AuthorDto(user1));
         postRepository.saveAll(Arrays.asList(post1, post2, post3));
 
