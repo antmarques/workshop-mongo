@@ -2,7 +2,6 @@ package com.workshop.api.dto;
 
 import com.workshop.api.entities.UserEntity;
 import lombok.Data;
-
 import java.io.Serial;
 import java.io.Serializable;
 

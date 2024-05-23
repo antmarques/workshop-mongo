@@ -1,12 +1,10 @@
 package com.workshop.api.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.workshop.api.dto.AuthorDto;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
