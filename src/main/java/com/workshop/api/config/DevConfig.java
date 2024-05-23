@@ -1,6 +1,7 @@
 package com.workshop.api.config;
 
 import com.workshop.api.dto.AuthorDto;
+import com.workshop.api.dto.CommentDto;
 import com.workshop.api.entities.PostEntity;
 import com.workshop.api.entities.UserEntity;
 import com.workshop.api.repositories.PostRepository;
@@ -43,6 +44,14 @@ public class DevConfig implements CommandLineRunner {
                 "Ficando mais velho e desempregado mesmo formado", new AuthorDto(user1));
         PostEntity post3 = new PostEntity(null, new Date(),
                 "Comprei meu primeiro video game","Meu sonho desde criança era comprar um vídeo game sozinho!", new AuthorDto(user1));
+        CommentDto comment1 = new CommentDto("Boa viajem mano", new Date(), new AuthorDto(user1));
+        CommentDto comment2 = new CommentDto("Parabéns pela sua conquista!", new Date(), new AuthorDto(user4));
+        CommentDto comment3 = new CommentDto("Agora consegue ganhar de mim no F1!", new Date(), new AuthorDto(user3));
+        CommentDto comment4 = new CommentDto("Dias melhores viram, FÉ!", new Date(), new AuthorDto(user2));
+
+        post1.getComments().add(comment1);
+        post2.getComments().add(comment4);
+        post3.getComments().addAll(Arrays.asList(comment2, comment3));
         postRepository.saveAll(Arrays.asList(post1, post2, post3));
 
         user1.getPosts().addAll(Arrays.asList(post2, post3));

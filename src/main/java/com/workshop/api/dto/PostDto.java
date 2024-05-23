@@ -14,8 +14,6 @@ public class PostDto implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
     private String id;
 
     private Date date;
@@ -36,7 +34,7 @@ public class PostDto implements Serializable {
         id = postEntity.getId();
         date = postEntity.getDate();
         title = postEntity.getTitle();
-        dateFormat = sdf.format(date);
+        dateFormat = postEntity.getDateFormat();
         body = postEntity.getBody();
         author = postEntity.getAuthor();
     }

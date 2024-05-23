@@ -1,6 +1,7 @@
 package com.workshop.api.entities;
 
 import com.workshop.api.dto.AuthorDto;
+import com.workshop.api.dto.CommentDto;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -8,7 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serial;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Document(collection = "post")
 @Data
@@ -30,6 +33,8 @@ public class PostEntity implements Serializable {
     private String body;
 
     private AuthorDto author;
+
+    private List<CommentDto> comments = new ArrayList<>();
 
     public PostEntity() {
     }
