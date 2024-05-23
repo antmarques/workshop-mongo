@@ -2,7 +2,6 @@ package com.workshop.api.dto;
 
 import lombok.Data;
 import org.springframework.data.annotation.Transient;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -13,8 +12,6 @@ public class CommentDto implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     private String text;
 
@@ -31,7 +28,12 @@ public class CommentDto implements Serializable {
     public CommentDto(String text, Date date, AuthorDto author) {
         this.text = text;
         this.date = date;
-        this.dateFormat = sdf.format(date);
         this.author = author;
+    }
+
+    public String getDateFormat() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat = sdf.format(date);
+        return dateFormat;
     }
 }
