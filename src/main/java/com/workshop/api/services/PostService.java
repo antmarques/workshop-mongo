@@ -25,6 +25,10 @@ public class PostService {
         return entity.orElseThrow(() -> new ObjectNotFoundException(id + " Not founded"));
     }
 
+    public List<PostEntity> findByTitle(String text) {
+        return postRepository.findByTitleContainingIgnoreCase(text);
+    }
+
     public PostEntity fromDto(PostDto dto) {
         return new PostEntity(dto.getId(), dto.getDate(), dto.getTitle(), dto.getBody(), dto.getAuthor());
     }
