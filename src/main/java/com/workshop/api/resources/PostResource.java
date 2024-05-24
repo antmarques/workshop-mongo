@@ -37,4 +37,11 @@ public class PostResource {
         List<PostEntity> listEntity = service.findByTitle(text);
         return ResponseEntity.ok().body(listEntity.stream().map(PostDto::new).toList());
     }
+
+    @GetMapping(value = "/bodysearch")
+    public ResponseEntity<List<PostDto>> findByDesc(@RequestParam(value = "text", defaultValue = "") String text) {
+        text = URLUtil.decodeParam(text);
+        List<PostEntity> listEntity = service.findByDesc(text);
+        return ResponseEntity.ok().body(listEntity.stream().map(PostDto::new).toList());
+    }
 }

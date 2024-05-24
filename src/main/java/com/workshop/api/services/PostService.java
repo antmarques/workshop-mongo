@@ -29,6 +29,10 @@ public class PostService {
         return postRepository.findByTitleContainingIgnoreCase(text);
     }
 
+    public List<PostEntity> findByDesc(String text) {
+        return postRepository.findByDesc(text);
+    }
+
     public PostEntity fromDto(PostDto dto) {
         return new PostEntity(dto.getId(), dto.getDate(), dto.getTitle(), dto.getBody(), dto.getAuthor());
     }
