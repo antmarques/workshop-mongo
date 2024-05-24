@@ -6,7 +6,7 @@ import com.workshop.api.repositories.PostRepository;
 import com.workshop.api.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +31,15 @@ public class PostService {
 
     public List<PostEntity> findByDesc(String text) {
         return postRepository.findByDesc(text);
+    }
+
+    public List<PostEntity> advancedSearch(String text, Date minDate, Date maxDate) {
+        maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
+        List<PostEntity> retorno = postRepository.advancedSearch(text, minDate, maxDate);
+        if (retorno.isEmpty()) {
+            throw new ObjectNotFoundException("Post não encontrado!");
+        }
+        return retorno;
     }
 
     public PostEntity fromDto(PostDto dto) {

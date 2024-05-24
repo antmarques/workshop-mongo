@@ -7,8 +7,7 @@ import com.workshop.api.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -42,6 +41,17 @@ public class PostResource {
     public ResponseEntity<List<PostDto>> findByDesc(@RequestParam(value = "text", defaultValue = "") String text) {
         text = URLUtil.decodeParam(text);
         List<PostEntity> listEntity = service.findByDesc(text);
+        return ResponseEntity.ok().body(listEntity.stream().map(PostDto::new).toList());
+    }
+
+    @GetMapping(value = "/advancedsearch")
+    public ResponseEntity<List<PostDto>> advancedSearch(@RequestParam(value = "text", defaultValue = "") String text,
+                                                        @RequestParam(value = "minDate", defaultValue = "") String minDate,
+                                                        @RequestParam(value = "maxDate", defaultValue = "") String maxDate) {
+        text = URLUtil.decodeParam(text);
+        Date min = URLUtil.convertDate(minDate, new Date(0L));
+        Date max = URLUtil.convertDate(maxDate, new Date());
+        List<PostEntity> listEntity = service.advancedSearch(text, min, max);
         return ResponseEntity.ok().body(listEntity.stream().map(PostDto::new).toList());
     }
 }
